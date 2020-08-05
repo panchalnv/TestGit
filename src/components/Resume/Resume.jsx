@@ -1,15 +1,14 @@
 /* eslint-disable object-curly-newline */
 /* eslint-disable no-unused-vars */
 /* eslint-disable linebreak-style */
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, Grid, IconButton, AppBar, Toolbar } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { pdfjs, Document, Page } from 'react-pdf';
 import Pagination from '@material-ui/lab/Pagination';
 import GetAppIcon from '@material-ui/icons/GetApp';
-//import MyResume from '../../resources/files/NikunjResume.pdf';
-import { ResumeId } from '../../resources/data/PortfolioData';
 import NavBar from '../Shared/NavBar';
+import { ResumeId } from '../../resources/data/PortfolioData';
 // import PropTypes from 'prop-types';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
@@ -26,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
   getAppIconStyle: {
     // color: 'white',
   },
+  documentStyle: {
+    color: '#F1C40F',
+  },
 }));
 
 function Resume(props) {
@@ -36,7 +38,11 @@ function Resume(props) {
   const [myResume, setMyResume] = useState();
 
   useEffect(() => {
-    setMyResume(`https://drive.google.com/uc?id=${ResumeId}&export=download`);
+    fetch(`/uc?id=${ResumeId}&export=download`)
+      .then((response) => {
+        //console.log(response);
+        setMyResume(response.url);
+      });
   }, []);
 
   function downloadFile() {
@@ -81,6 +87,7 @@ function Resume(props) {
             file={myResume}
             loading="Loading Nikunj's Resume"
             onLoadSuccess={onLoadSuccess}
+            className={classes.documentStyle}
           >
             <Page pageNumber={pageNumber} />
           </Document>

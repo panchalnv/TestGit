@@ -12,15 +12,6 @@ import Social from '../Shared/Social';
 
 // Change Material-UI Styles
 const useStyles = makeStyles((theme) => ({
-  titleHeader: {
-    position: 'absolute',
-    top: '30%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: '100vw',
-    textAlign: 'center',
-    zIndex: 1,
-  },
   title: {
     color: 'tomato',
     fontWeight: 'bold',
@@ -39,14 +30,10 @@ const useStyles = makeStyles((theme) => ({
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '100vw',
+    //width: '100vw',
     textAlign: 'center',
     zIndex: 1,
   },
-  // messageStyle: {
-  //   color: 'white',
-  //   marginBottom: '3rem',
-  // }
 }));
 
 function Contact(props) {
@@ -58,18 +45,10 @@ function Contact(props) {
   return (
     <>
       <NavBar />
-      {/* <Box className={classes.titleHeader}>
-        <Typography variant="h3" className={classes.title}>
-          Contact Me
-        </Typography>
-      </Box> */}
       <Box className={classes.typedContainer}>
         <Typography variant="h3" className={classes.title}>
           Get in Touch
         </Typography>
-        {/* <Typography variant="h5" className={classes.messageStyle}>
-          Check out my projects and resume from side bar, and feel free to reach out so we can chat more.
-        </Typography> */}
         <Typography variant="h5" className={classes.subtitleContainer}>
           <SmartphoneIcon /> <a href={`tel:+1${cell}"`} className={classes.subtitle}>{cell}</a><br />
           <EmailIcon /> <a href={`mailto:${email}`} className={classes.subtitle}>{email}</a>

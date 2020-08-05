@@ -361,7 +361,7 @@ const PersonalDetails = [
   { key: 'Email', value: 'panchalnv@gmail.com' },
 ];
 
-const ResumeId = '1Q1LbxvG9tl6O9rXL_e8-OLSWZfjijbfK';
+const ResumeId = '1jf7ktkf7Jq22N3aSMFAUUQSPShi1UU9f';
 
 export {
   MenuData,
