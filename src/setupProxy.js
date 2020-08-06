@@ -5,7 +5,7 @@ module.exports = function (app) {
     createProxyMiddleware('/uc', {
       target: 'https://drive.google.com',
       changeOrigin: true,
-      //ws: true, // proxy websockets
+      ws: true, // proxy websockets
     })
   );
 };
