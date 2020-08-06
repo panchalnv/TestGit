@@ -3,9 +3,10 @@ const { createProxyMiddleware } = require('http-proxy-middleware')
 module.exports = function (app) {
   app.use(
     createProxyMiddleware('/uc', {
-      target: 'https://drive.google.com/',
+      target: 'https://drive.google.com',
       changeOrigin: true,
-      //ws: true, // proxy websockets
+      ws: true, // proxy websockets
+      pathRewrite: {'^/' : '/https://drive.google.com/'}
     }),    
   );
 };
