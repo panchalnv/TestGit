@@ -6,7 +6,7 @@ module.exports = function (app) {
       target: 'https://drive.google.com',
       changeOrigin: true,
       ws: true, // proxy websockets
-      pathRewrite: {'^/' : '/https://drive.google.com/'}
+      pathRewrite: {'^/https://panchal.netlify.app/' : ''}
     }),    
   );
 };
