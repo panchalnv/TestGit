@@ -6,9 +6,11 @@ module.exports = function (app) {
       target: 'https://drive.google.com',
       changeOrigin: true,
       //ws: true, // proxy websockets
-      router: function (req) {
-        return 'https://drive.google.com'
-      }
-    })
+    }),
+    createProxyMiddleware('https://panchal.netlify.app/resume', {
+      target: 'https://drive.google.com/uc',
+      changeOrigin: true,
+      //ws: true, // proxy websockets
+    }),    
   );
 };
