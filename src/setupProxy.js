@@ -5,8 +5,8 @@ module.exports = function (app) {
     createProxyMiddleware('/uc', {
       target: 'https://drive.google.com',
       changeOrigin: true,
-      ws: true, // proxy websockets
-      pathRewrite: {'^/https://panchal.netlify.app/' : ''}
+      //ws: true, // proxy websockets
+      pathRewrite: {'^/' : ''}
     }),    
   );
 };
