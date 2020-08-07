@@ -38,10 +38,13 @@ function Resume(props) {
   const [myResume, setMyResume] = useState();
 
   useEffect(() => {
-    fetch(`https://drive.google.com/uc?id=${ResumeId}&export=download`)
+    fetch(`https://drive.google.com/uc?id=${ResumeId}&export=download`, 
+         headers: {
+            'Access-Control-Allow-Origin': '*',
+         })
       .then((response) => {
         console.log(response);
-        setMyResume(response.location);
+        setMyResume(response.url);
       });
   }, []);
 
