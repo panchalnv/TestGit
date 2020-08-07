@@ -38,7 +38,7 @@ function Resume(props) {
   const [myResume, setMyResume] = useState();
 
   useEffect(() => {
-    fetch(`https://drive.google.com/uc?id=${ResumeId}&export=download`, { mode: 'no-cors' })
+    fetch(`/uc?id=${ResumeId}&export=download`)
       .then((response) => {
         console.log(response);
         setMyResume(response.url);
