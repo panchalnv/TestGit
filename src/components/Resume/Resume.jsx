@@ -40,7 +40,7 @@ function Resume(props) {
   useEffect(() => {
     fetch(`/uc?id=${ResumeId}&export=download`)
       .then((response) => {
-        //console.log(response);
+        console.log(response);
         setMyResume(response.url);
       });
   }, []);

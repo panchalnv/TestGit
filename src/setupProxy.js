@@ -17,6 +17,10 @@ module.exports = function (app) {
         '^/\\.netlify/functions': '',
         '/uc': 'https://drive.google.com',
       },
+      //pathRewrite: {'^/' : ''}
+      router: {
+        'https://panchal.netlify.app/': 'https://drive.google.com'
+      },
     }),
   );
 };
