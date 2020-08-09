@@ -45,27 +45,21 @@ function Resume(props) {
   const [message, setMessage] = useState('SHREE GANESH');
   //const [myResume, setMyResume] = useState(myResumePath);
 
-  function onMessageClick() {
+  function getFile() {
     fetch('/.netlify/functions/getFiles')
-      .then((res) => res.json())
+      //.then((res) => res.json())
       .then((res) => {
-        //setMessage(res);
-        //setMyResume(res.url);
-      // .then((response) => response.body)
-      // .then((body) => {
-      //   const reader = body.getReader();
-      //   reader.releaseLock();
+        setMyResume(res.url);
       });
   }
 
-  // useEffect(() => {
-  //   fetch(`/uc?id=${ResumeId}&export=download`)
-  //     .then((response) => {
-  //       console.log(response);
-  //       setMyResume(response.url);
-  //       //setMyResume(myResumePath);
-  //     });
-  // }, []);
+  function onMessageClick() {
+    getFile();
+  }
+
+  useEffect(() => {
+    getFile();
+  }, []);
 
   function downloadFile() {
     const anchorLink = document.createElement('a');
@@ -112,7 +106,7 @@ function Resume(props) {
         <a href={myResumePath} target="_blank">Download Pdf</a> */}
         <Grid container justify="center">
           <Document
-            file={myResumePath}
+            file={myResume}
             loading="Loading Nikunj's Resume"
             onLoadSuccess={onLoadSuccess}
             className={classes.documentStyle}
