@@ -37,7 +37,7 @@ async function getFiles () {
     .then((res) => {
       return new Promise((resolve, reject) => {
         //const filePath = path.join(process.cwd(), 'NikunjResume.pdf');
-        const filePath = path.join(process.cwd(), '../../NikunjResume.pdf');
+        const filePath = path.join(process.cwd(), '../../../NikunjResume.pdf');
         console.log(filePath);
         console.log(`writing to ${filePath}`);
         const dest = fs.createWriteStream(filePath);
