@@ -1,33 +1,14 @@
-const { google } = require('googleapis');
+'use strict';
+
+const {google} = require('googleapis');
 const path = require('path');
 const fs = require('fs');
+const os = require('os');
+const uuid = require('uuid');
 
 const credentials = require('./keys.json');
 
-// function getCredentials() {
-//   const filePath = path.join(__dirname, 'keys.json');
-//   console.log(filePath);
-// //   if (fs.existsSync(filePath)) {
-// //     return require(filePath);
-// //   }
-// //   if (process.env.CREDENTIALS) {
-// //     return JSON.parse(process.env.CREDENTIALS);
-// //   }
-//   throw new Error('Unable to load credentials-1');
-// }
-
-// const getClient = ({ scopes }) => {
-//   return google.auth.getClient({
-//     credentials: JSON.parse(
-//       Buffer.from(process.env.GOOGLE_SERVICE_ACCOUNT, 'base64').toString(
-//         'ascii',
-//       ),
-//     ),
-//     scopes,
-//   });
-// };
-
-async function getFiles() {
+async function getFiles () {
   //const credentials = getCredentials();
   const client = await google.auth.getClient({
     credentials,
@@ -47,28 +28,43 @@ async function getFiles() {
   });
   //return drive.files.list();
   const fileId = '1jf7ktkf7Jq22N3aSMFAUUQSPShi1UU9f';
-  //var dest = fs.createWriteStream(‘./FILE_NAME.extension’);
-  const params = {
-    fileId,
-    alt: 'media',
-    //mimeType: 'application/pdf',
-  };
-  return drive.files.get(params);
+  // return drive.files.get({
+  //   fileId,
+  //   alt: 'media',
+  // });
+  return drive.files
+    .get({ fileId, alt: 'media' }, { responseType: 'stream' })
+    .then((res) => {
+      return new Promise((resolve, reject) => {
+        const filePath = path.join('./NikunjResume.pdf');
+        console.log(filePath);
+        console.log(`writing to ${filePath}`);
+        const dest = fs.createWriteStream(filePath);
+        let progress = 0;
 
-//   const client = await getClient({
-//     scopes: ['https://www.googleapis.com/auth/drive'],
-//   });
-//   const drive = google.drive({
-//     version: 'v2',
-//     auth: client,
-//   });
-//   return drive.files.list();
+        res.data
+          .on('end', () => {
+            console.log('Done downloading file.');
+            resolve(filePath);
+          })
+          .on('error', (err) => {
+            console.error('Error downloading file.');
+            reject(err);
+          })
+          .on('data', (d) => {
+            progress += d.length;
+            if (process.stdout.isTTY) {
+              process.stdout.clearLine();
+              process.stdout.cursorTo(0);
+              process.stdout.write(`Downloaded ${progress} bytes`);
+            }
+          })
+          .pipe(dest);
+      });
+    });
 }
 
 exports.handler = function (event, context, callback) {
-  //console.log(`DATE! ${new Date()}`);
-//   const parseBody = JSON.parse(event.body);
-//   console.log(parseBody);
   getFiles().then((res) => {
     callback(null, {
       statusCode: 200,

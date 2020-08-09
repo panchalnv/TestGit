@@ -15,12 +15,12 @@ module.exports = function (app) {
       //ws: true, // proxy websockets
       pathRewrite: {
         '^/\\.netlify/functions': '',
-        '/uc': 'https://drive.google.com',
+        //'/uc': 'https://drive.google.com',
       },
       //pathRewrite: {'^/' : ''}
-      router: {
-        'https://panchal.netlify.app/': 'https://drive.google.com'
-      },
+      // router: {
+      //   'https://panchal.netlify.app/': 'https://drive.google.com'
+      // },
     }),
   );
 };
