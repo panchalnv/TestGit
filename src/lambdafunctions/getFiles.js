@@ -36,7 +36,7 @@ async function getFiles () {
     .get({ fileId, alt: 'media' }, { responseType: 'stream' })
     .then((res) => {
       return new Promise((resolve, reject) => {
-        const filePath = path.join('/tmp/NikunjResume.pdf');
+        const filePath = path.join('./static/media', 'NikunjResume.pdf');
         //const filePath = path.join(os.tmpdir(), 'NikunjResume.pdf');
         console.log(filePath);
         console.log(`writing to ${filePath}`);
