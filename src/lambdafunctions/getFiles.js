@@ -36,23 +36,29 @@ async function getFiles () {
     .get({ fileId, alt: 'media' }, { responseType: 'stream' })
     .then((res) => {
       return new Promise((resolve, reject) => {
-        //const filePath = path.join(process.cwd(), 'NikunjResume.pdf');
-        const filePath = path.join(process.cwd(), '../../../NikunjResume.pdf');
+        //const filePath = path.join('./NikunjResume.pdf');
+        const filePath = path.join(os.tmpdir(), 'NikunjResume.pdf');
         console.log(filePath);
         console.log(`writing to ${filePath}`);
         const dest = fs.createWriteStream(filePath);
         let progress = 0;
+        const buf = [];
 
         res.data
           .on('end', () => {
             console.log('Done downloading file.');
-            resolve(filePath);
+            //resolve(filePath);
+            const buffer = Buffer.concat(buf);
+            console.log(buffer);
+            // fs.writeFile("filename", buffer, err => console.log(err)); // For testing
+            resolve(buffer);          
           })
           .on('error', (err) => {
             console.error('Error downloading file.');
             reject(err);
           })
           .on('data', (d) => {
+            buf.push(d);
             progress += d.length;
             if (process.stdout.isTTY) {
               process.stdout.clearLine();
@@ -68,8 +74,14 @@ async function getFiles () {
 exports.handler = function (event, context, callback) {
   getFiles().then((res) => {
     callback(null, {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/pdf',
+      },      
       statusCode: 200,
-      body: JSON.stringify(res.data),
+      //body: JSON.stringify(res.data),
+      body: res.toString('base64'),
+      isBase64Encoded: true,
     });
   }).catch((e) => {
     callback(e);
