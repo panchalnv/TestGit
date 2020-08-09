@@ -12,8 +12,7 @@ import Pagination from '@material-ui/lab/Pagination';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import NavBar from '../Shared/NavBar';
 import { ResumeId } from '../../resources/data/PortfolioData';
-import myResumePath from '/tmp/NikunjResume.pdf';
-//import myResumePath from '../../resources/files/NikunjResume.pdf';
+import myResumePath from '../../resources/files/NikunjResume.pdf';
 // import PropTypes from 'prop-types';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
