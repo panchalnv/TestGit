@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     color: '#F1C40F',
   },
   SyncStyle: {
-    display: 'none',
+    //display: 'none',
   },
 }));
 
@@ -47,10 +47,10 @@ function Resume(props) {
 
   function onMessageClick() {
     fetch('/.netlify/functions/getFiles')
-      .then((res) => res.json())
+      //.then((res) => res.json())
       .then((res) => {
         //setMessage(res);
-        //setMyResume(res.url);
+        setMyResume(res.url);
       // .then((response) => response.body)
       // .then((body) => {
       //   const reader = body.getReader();
@@ -112,7 +112,7 @@ function Resume(props) {
         <a href={myResumePath} target="_blank">Download Pdf</a> */}
         <Grid container justify="center">
           <Document
-            file={myResumePath}
+            file={myResume}
             loading="Loading Nikunj's Resume"
             onLoadSuccess={onLoadSuccess}
             className={classes.documentStyle}
