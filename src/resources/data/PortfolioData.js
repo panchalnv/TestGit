@@ -350,15 +350,16 @@ const PersonalDetails = [
   {
     key: 'AboutMe',
     values: [
-      'I have been employed in the tech industries since 2010, holding multiple software engineering positions',
-      'I\'m a Full Stack Developer primarily focused on Mobile, Web and Windows applications.',
-      // 'I enjoy working on Front-end/UI Technologies (ReactJS, Sencha ExtJS/Touch Framework)',
-      // 'Experienced on Microsoft Technologies: .NET Framework, Web language (ASP.NET), Programming language (C#.NET, VB.NET)',
-      ' I am self-taught and started programming on Swift, Python and Flutter',
+      'I am a lead full stack developer at',
+      'STERIS',
+      'with over 15+ years of experience in web, mobile and windows applications. I am always looking to broaden my horizon when it comes to new technologies and searching for challenges in order to provide the best product to the end user.',
+      'Please refer to my',
+      'RESUME',
+      'if you have any more questions.',
     ],
   },
-  { key: 'Cell', value: '650 416-NIKU' },
-  { key: 'Email', value: 'panchalnv@gmail.com' },
+  { key: 'Cell', value: '650 RINGNIK' },
+  { key: 'Email', value: 'LetsMailNikunj@gmail.com' },
 ];
 
 const ResumeId = '1jf7ktkf7Jq22N3aSMFAUUQSPShi1UU9f';

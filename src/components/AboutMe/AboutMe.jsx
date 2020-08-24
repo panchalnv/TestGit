@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable array-callback-return */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable object-curly-newline */
@@ -72,19 +73,19 @@ function AboutMe(props) {
           About Me
         </Typography>
         <Typography variant="h6" className={classes.subtitle}>
-          I am currently a Lead Software developer at <a href="https://www.steris.com/" rel="noopener noreferrer" target="_blank" className={classes.linkStyle}>STERIS</a>
           {
             aboutMe.map((point) => {
               return (
                 <span key={`${point}-mainkey`}>
-                  <span key={`${point}-secondarykey`} className={classes.dividerStyle}> | </span>
-                  {point}
+                  <span key={`${point}-secondarykey`} className={classes.dividerStyle}> </span>
+                  {(point.toLowerCase() === 'steris')
+                    ? <a href="https://www.steris.com/" rel="noopener noreferrer" target="_blank" className={classes.linkStyle}>{point}</a>
+                    : ((point.toLowerCase() === 'resume')
+                      ? <Link to="/resume" className={classes.linkStyle}>{point}</Link> : point)}
                 </span>
               );
             })
           }
-          <span className={classes.dividerStyle}> | </span>
-          Please check out my <Link to="/resume" className={classes.linkStyle}>RESUME</Link>
         </Typography>
       </Box>
     </>
